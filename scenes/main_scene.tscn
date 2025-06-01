@@ -1,0 +1,77 @@
+[gd_scene load_steps=8 format=3 uid="uid://byt7c4thbd8qq"]
+
+[ext_resource type="PackedScene" uid="uid://cft7ln6i63kir" path="res://Scenes/components/day_night_cycle_component.tscn" id="1_nunak"]
+[ext_resource type="PackedScene" uid="uid://dm0jwwbghh8e7" path="res://resources/Shaders/niebla.tscn" id="2_iacmt"]
+[ext_resource type="PackedScene" uid="uid://dnt0rry0v5ntr" path="res://Scenes/levels/level_2.tscn" id="2_p3ske"]
+[ext_resource type="PackedScene" uid="uid://yqwteea6e2jt" path="res://Scenes/characters/player/player.tscn" id="3_ibqqm"]
+[ext_resource type="PackedScene" uid="uid://dytri7vg55tgo" path="res://Scenes/ui/game_screen.tscn" id="4_4ntq2"]
+[ext_resource type="Shader" uid="uid://bmdlgqxxsbp8n" path="res://resources/Shaders/VHSShader.gdshader" id="6_6ev3c"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_maf8m"]
+resource_local_to_scene = true
+shader = ExtResource("6_6ev3c")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.035
+shader_parameter/scanlines_width = 0.03
+shader_parameter/grille_opacity = 0.031
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = false
+shader_parameter/roll = true
+shader_parameter/roll_speed = 4.0
+shader_parameter/roll_size = 5.29
+shader_parameter/roll_variation = 0.466
+shader_parameter/distort_intensity = 0.01
+shader_parameter/noise_opacity = 0.058
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 4.75e-08
+shader_parameter/brightness = 0.91
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.05
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.03
+shader_parameter/vignette_opacity = 0.008
+
+[node name="MainScene" type="Node"]
+
+[node name="DayNightCycleComponent" parent="." instance=ExtResource("1_nunak")]
+
+[node name="GameRoot" type="Node2D" parent="."]
+y_sort_enabled = true
+
+[node name="LevelRoot" type="Node2D" parent="GameRoot"]
+y_sort_enabled = true
+
+[node name="Level2" parent="GameRoot/LevelRoot" instance=ExtResource("2_p3ske")]
+position = Vector2(568, 789)
+
+[node name="Player" parent="GameRoot" instance=ExtResource("3_ibqqm")]
+y_sort_enabled = true
+position = Vector2(112, 324)
+
+[node name="Camera2D" type="Camera2D" parent="GameRoot/Player"]
+process_callback = 0
+limit_left = -290
+limit_top = 0
+limit_right = 1500
+limit_bottom = 1620
+limit_smoothed = true
+position_smoothing_enabled = true
+
+[node name="GameScreen" parent="." instance=ExtResource("4_4ntq2")]
+layer = 2
+
+[node name="Nubes" parent="GameScreen" instance=ExtResource("2_iacmt")]
+layer = 1
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="VHSOverlay" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_maf8m")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

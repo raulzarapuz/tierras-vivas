@@ -1,0 +1,42 @@
+~ start
+Carmen: ¡Hola! Encantada de conocerte.
+Carmen: Bienvenido a tu nueva granja en Tierras Vivas.
+Carmen: Como puedes ver, los animales no tienen comida.
+Carmen: Necesitamos cultivar algunos alimentos sostenibles para ayudarles.
+Carmen: Pero antes de darte las semillas... quiero ver cuánto sabes sobre sostenibilidad.
+Carmen: Vamos con una pequeña prueba.
+
+Carmen: ¿Cuál de estas opciones es una práctica sostenible en la agricultura?
+- Rotar cultivos cada temporada
+	Carmen: ¡Correcto! Rotar cultivos ayuda a mantener el suelo sano.
+	=> pregunta_2
+- Usar pesticidas sin control
+	Carmen: Mmm... no, eso contamina el suelo y el agua.
+	=> pregunta_2
+- Quitar todos los árboles para plantar más rápido
+	Carmen: ¡No! Eso genera deforestación y erosión del suelo.
+	=> pregunta_2
+
+~ pregunta_2
+Carmen: Segunda y última... ¿Cuál es el mejor momento para regar los cultivos?
+- Al mediodía
+	Carmen: No exactamente, al mediodía el agua se evapora más rápido.
+	=> resultado_final
+- Por la noche
+	Carmen: Es mejor que al mediodía, pero puede favorecer hongos en exceso.
+	=> resultado_final
+- Por la mañana temprano
+	Carmen: ¡Perfecto! Así el agua se absorbe mejor y se evita la evaporación.
+	=> resultado_final
+
+~ resultado_final
+Carmen: Muy bien, veo que sabes lo justo para empezar.
+Carmen: Aquí tienes unas semillas para que pongas manos a la obra.
+
+- Tomar semillas
+	Jugador: ¡Vamos a cultivar!
+	do GameDialogueManager.action_give_crop_seeds()
+- Prefiero no empezar ahora
+	Jugador: Tal vez más tarde...
+
+=> END

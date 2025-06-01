@@ -1,0 +1,73 @@
+[gd_scene load_steps=12 format=3 uid="uid://ceybpb3gixc2d"]
+
+[ext_resource type="Script" uid="uid://c21247cd2twqf" path="res://Scenes/characters/anciano/anciano.gd" id="1_ftlp0"]
+[ext_resource type="Shader" uid="uid://cka2onq86mlkn" path="res://resources/Shaders/replace_color.gdshader" id="2_w5pi0"]
+[ext_resource type="Texture2D" uid="uid://dd46d3oeummy0" path="res://Assets/game/Characters/Anciano.png" id="3_ftlp0"]
+[ext_resource type="PackedScene" uid="uid://32exf6qt06cl" path="res://Scenes/components/InteractableComponent.tscn" id="4_pv41x"]
+[ext_resource type="PackedScene" uid="uid://bxlgqig1f0gd8" path="res://Scenes/components/InteractableLabelComponent.tscn" id="5_oipnn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p2q2d"]
+shader = ExtResource("2_w5pi0")
+shader_parameter/original_0 = Color(0.360784, 0.305882, 0.572549, 1)
+shader_parameter/original_1 = Color(0.462745, 0.427451, 0.666667, 1)
+shader_parameter/replace_0 = Color(0.773164, 0.155473, 0.360975, 1)
+shader_parameter/replace_1 = Color(0.848761, 0.451561, 0.16668, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w5pi0"]
+atlas = ExtResource("3_ftlp0")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3xwk"]
+atlas = ExtResource("3_ftlp0")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pv41x"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w5pi0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3xwk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t8e81"]
+radius = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fy4os"]
+size = Vector2(12, 13)
+
+[node name="Anciano" type="StaticBody2D"]
+position = Vector2(0, 1)
+script = ExtResource("1_ftlp0")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_p2q2d")
+position = Vector2(4.76837e-07, -8)
+scale = Vector2(1.46875, 1.46875)
+sprite_frames = SubResource("SpriteFrames_pv41x")
+autoplay = "default"
+frame_progress = 0.992499
+
+[node name="InteractableComponent" parent="." instance=ExtResource("4_pv41x")]
+y_sort_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_t8e81")
+
+[node name="InteractableLabelComponent" parent="." instance=ExtResource("5_oipnn")]
+z_index = 1
+offset_left = -9.0
+offset_top = -37.0
+offset_right = 9.0
+offset_bottom = -19.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5.5)
+shape = SubResource("RectangleShape2D_fy4os")

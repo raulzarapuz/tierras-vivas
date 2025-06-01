@@ -1,0 +1,64 @@
+[gd_scene load_steps=10 format=3 uid="uid://bvuvjk0dvc41u"]
+
+[ext_resource type="Script" uid="uid://dxm5tqcb0xbnl" path="res://Scenes/characters/guide/guide.gd" id="1_0lmh6"]
+[ext_resource type="Texture2D" uid="uid://cnip45oon2j3f" path="res://Assets/game/Characters/Carmen.png" id="3_2ia5c"]
+[ext_resource type="PackedScene" uid="uid://32exf6qt06cl" path="res://Scenes/components/InteractableComponent.tscn" id="3_n8u8b"]
+[ext_resource type="PackedScene" uid="uid://bxlgqig1f0gd8" path="res://Scenes/components/InteractableLabelComponent.tscn" id="4_ulabi"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iid2l"]
+atlas = ExtResource("3_2ia5c")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oqh66"]
+atlas = ExtResource("3_2ia5c")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6n5mp"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iid2l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oqh66")
+}],
+"loop": true,
+"name": &"default",
+"speed": 1.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t8e81"]
+radius = 16.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fy4os"]
+size = Vector2(12, 12)
+
+[node name="Guide" type="CharacterBody2D"]
+position = Vector2(0, 1)
+script = ExtResource("1_0lmh6")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+y_sort_enabled = true
+position = Vector2(0, -10)
+scale = Vector2(1.3125, 1.3125)
+sprite_frames = SubResource("SpriteFrames_6n5mp")
+autoplay = "default"
+frame_progress = 0.133917
+
+[node name="InteractableComponent" parent="." instance=ExtResource("3_n8u8b")]
+y_sort_enabled = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableComponent"]
+position = Vector2(0, -8)
+shape = SubResource("CircleShape2D_t8e81")
+
+[node name="InteractableLabelComponent" parent="." instance=ExtResource("4_ulabi")]
+z_index = 1
+offset_left = -9.0
+offset_top = -37.0
+offset_right = 9.0
+offset_bottom = -19.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -6)
+shape = SubResource("RectangleShape2D_fy4os")

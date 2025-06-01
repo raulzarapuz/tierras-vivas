@@ -1,0 +1,42 @@
+~ start
+Anciano: Hola, joven. Qué alegría ver a alguien interesado en cuidar la tierra.
+Anciano: ¿Te puedo hacer unas preguntas sobre sostenibilidad?
+- Sí, claro
+	Anciano: Perfecto. Empecemos.
+	=> pregunta_1
+- Mejor en otro momento
+	Anciano: Entiendo. Pero recuerda, cuidar la tierra no espera.
+	=> END
+
+~ pregunta_1
+Anciano: ¿Cuál de estas opciones es la más sostenible para regar los cultivos?
+- Usar agua de lluvia recogida en depósitos
+	Anciano: ¡Exacto! Aprovechar el agua de lluvia reduce el gasto y es más respetuoso con el entorno.
+	=> pregunta_2
+- Regar a diario con una manguera
+	Anciano: No es lo ideal... eso gasta mucha agua innecesariamente.
+	=> pregunta_2
+
+~ pregunta_2
+Anciano: ¿Qué haces con los residuos orgánicos que generas en la granja?
+- Los convierto en compost
+	Anciano: Muy bien. Así enriqueces la tierra y reduces basura.
+	=> pregunta_3
+- Los tiro al río
+	Anciano: Eso contamina y perjudica a los animales y a la tierra.
+	=> pregunta_3
+
+~ pregunta_3
+Anciano: ¿Cuál es una buena forma de respetar la biodiversidad en tu entorno?
+- Plantar distintos cultivos y dejar espacio para flores silvestres
+	Anciano: Correcto. Eso atrae polinizadores y mejora la salud del ecosistema.
+	=> cierre
+- Usar pesticidas para eliminar todo bicho
+	Anciano: No todos los insectos son malos. Algunos son esenciales para el equilibrio natural.
+	=> cierre
+
+~ cierre
+Anciano: Has aprendido algo importante hoy, espero.
+Anciano: La sostenibilidad no es una moda, es una forma de vivir en armonía con la tierra.
+Anciano: Cuando cuidas el campo, el campo cuida de ti.
+=> END

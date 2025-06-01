@@ -1,0 +1,26 @@
+~ start_cow_box
+
+Contenedor de Pienso: Las vacas necesitan comida, pero no cualquier cosa.
+Contenedor de Pienso: Alimentos que vengan de la tierra, trabajados con respeto, hacen la diferencia.
+Contenedor de Pienso: ¿Quieres alimentar a las vacas con lo que has recolectado?
+- Sí, alimentar con lo cosechado
+	Claro, esto es para ellas. Todo vuelve.
+	do GameDialogueManager.action_feed_animals()
+- No, volveré más tarde
+	Aún no tengo lo suficiente. Primero recojo más.
+
+=> END
+
+
+~ start_chicken_box
+
+Contenedor de Pienso: Las gallinas esperan alimento. Lo que les damos, vuelve en forma de vida.
+Contenedor de Pienso: Si sembramos bien, cuidamos el ciclo y recibimos con gratitud.
+Contenedor de Pienso: ¿Quieres darles de comer ahora?
+- Sí, usar parte de la cosecha
+	Por supuesto, así mantenemos el equilibrio.
+	do GameDialogueManager.action_feed_animals()
+- No por ahora
+	Volveré cuando tenga algo digno de darles.
+
+=> END

@@ -1,0 +1,122 @@
+[gd_scene load_steps=8 format=3 uid="uid://de1hdcl7ugf3j"]
+
+[ext_resource type="PackedScene" uid="uid://33770y51fa2q" path="res://Scenes/test/game_menu_scene.tscn" id="1_1vu31"]
+[ext_resource type="Script" uid="uid://dcl1xcexehtew" path="res://Scenes/ui/game_menu_screen.gd" id="1_ew25c"]
+[ext_resource type="Theme" uid="uid://bvahw72yoclgl" path="res://Scenes/ui/game_ui_theme.tres" id="1_flqvy"]
+[ext_resource type="PackedScene" uid="uid://cjp8kttc2jfja" path="res://Scenes/components/MouseCursorComponent.tscn" id="2_uje73"]
+[ext_resource type="Shader" uid="uid://bmdlgqxxsbp8n" path="res://resources/Shaders/VHSShader.gdshader" id="5_eh60a"]
+[ext_resource type="FontFile" uid="uid://d0wedl3b4fwq0" path="res://Assets/font/PressStart2P-Regular.ttf" id="5_x3ffv"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_x3ffv"]
+shader = ExtResource("5_eh60a")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.068
+shader_parameter/scanlines_width = 0.018
+shader_parameter/grille_opacity = 0.072
+shader_parameter/resolution = Vector2(640, 480)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 4.0
+shader_parameter/roll_size = 6.117
+shader_parameter/roll_variation = 0.709
+shader_parameter/distort_intensity = 0.004
+shader_parameter/noise_opacity = 0.058
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.06
+shader_parameter/aberration = 0.00300005
+shader_parameter/brightness = 0.745
+shader_parameter/discolor = false
+shader_parameter/warp_amount = 0.05
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.005
+shader_parameter/vignette_opacity = 0.008
+
+[node name="GameMenuScreen" type="CanvasLayer"]
+layer = 3
+script = ExtResource("1_ew25c")
+
+[node name="MouseCursorComponent" parent="." instance=ExtResource("2_uje73")]
+
+[node name="GameMenuScene" parent="." instance=ExtResource("1_1vu31")]
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_flqvy")
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Titulo" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_type_variation = &"DayAndNightLabel"
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 7
+theme_override_constants/shadow_offset_y = 4
+theme_override_constants/outline_size = 7
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = ExtResource("5_x3ffv")
+theme_override_font_sizes/font_size = 52
+text = "Tierras
+Vivas
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="StartGameButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+size_flags_vertical = 4
+theme_type_variation = &"ToolButton"
+theme_override_fonts/font = ExtResource("5_x3ffv")
+theme_override_font_sizes/font_size = 14
+text = "START"
+
+[node name="SaveGameButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_type_variation = &"ToolButton"
+theme_override_fonts/font = ExtResource("5_x3ffv")
+theme_override_font_sizes/font_size = 14
+text = "GUARDAR"
+
+[node name="ExitGameButton" type="Button" parent="MarginContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_type_variation = &"ToolButton"
+theme_override_constants/outline_size = 0
+theme_override_fonts/font = ExtResource("5_x3ffv")
+theme_override_font_sizes/font_size = 14
+text = "SALIR
+"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 128
+
+[node name="VHSOverlay" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource("ShaderMaterial_x3ffv")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer2/StartGameButton" to="." method="_on_start_game_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer2/SaveGameButton" to="." method="_on_save_game_button_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/VBoxContainer2/ExitGameButton" to="." method="_on_exit_game_button_pressed"]

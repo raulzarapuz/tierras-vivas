@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://cybii8iclq3lp"]
+
+[ext_resource type="Shader" uid="uid://dj7x24nnky0p6" path="res://resources/Shaders/ObjetoGlow.gdshader" id="1_86rym"]
+[ext_resource type="Texture2D" uid="uid://dtcll14c72bvj" path="res://Assets/game/Objects/Egg_item.png" id="1_c7vhf"]
+[ext_resource type="PackedScene" uid="uid://c6ntn1rn6kmd" path="res://Scenes/components/collectable_component.tscn" id="2_ntivd"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6erqi"]
+shader = ExtResource("1_86rym")
+shader_parameter/highlight_color = Color(1, 1, 1, 1)
+shader_parameter/frequency = 0.35
+shader_parameter/highlight_speed = 6.0
+shader_parameter/highlight_width = 15.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_0i8h1"]
+radius = 7.0
+
+[node name="Egg" type="Sprite2D"]
+y_sort_enabled = true
+material = SubResource("ShaderMaterial_6erqi")
+texture = ExtResource("1_c7vhf")
+
+[node name="CollectableComponent" parent="." instance=ExtResource("2_ntivd")]
+collectable_name = "egg"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollectableComponent"]
+shape = SubResource("CircleShape2D_0i8h1")
